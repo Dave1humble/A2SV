@@ -1,19 +1,19 @@
 class Solution:
     def checkInclusion(self, s1: str, s2: str) -> bool:
-        mps1 = Counter(s1)
-        mps2 = Counter(s2[:len(s1)])
-        l = 0
-        for i in range(len(s1),len(s2)):
-            if mps1 == mps2:
-                return True
-            mps2[s2[l]] -= 1
-            if mps2[s2[l]] == 0:
-                del mps2[s2[l]]
-            mps2[s2[i]] += 1
-            l += 1
-        if mps1 == mps2:
-            return True
-        return False
+     
+        left = 0
+        s1counter = Counter(s1)
+        s2counter = Counter(s2[:len(s1)-1])
+        for right in range(len(s1)-1, len(s2)):
+            s2counter[s2[right]] += 1
 
+            if s2counter == s1counter:
+                return True
+            else:
+                s2counter[s2[left]] -= 1
+                if s2counter[s2[left]] == 0:
+                    del s2counter[s2[left]] 
+                left += 1
+        return False
        
         
