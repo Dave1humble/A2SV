@@ -1,0 +1,14 @@
+class Solution:
+    def maxVowels(self, s: str, k: int) -> int:
+        count_vowel = 0
+        left = 0
+        res = 0
+        vowelset = {'a', 'e', 'i', 'o', 'u'}
+        for right in range(len(s)):
+            count_vowel += 1 if s[right] in vowelset else 0
+            
+            if  (right - left + 1) > k:
+                count_vowel -= 1 if s[left] in vowelset else 0
+                left += 1
+            res = max(res, count_vowel)
+        return res
